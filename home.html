@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gi</title>
+    <!--IMPORT BOOTSTRAP-->
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <style>
+        body{
+            background-color: #f0ecff;
+        
+        }
+        .card{
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+       <!-- NAVIGATION BAR CONT -->
+       <div class="container" >
+        <div class="d-flex justify-content-center">
+            <div class="col-9">
+                <nav class="navbar navbar-expand-lg bg-body-tertiary shadow rounded pt-3">
+                    <div class="container-fluid">
+                      <a class="navbar-brand" href="#">Tarmeez</a>
+                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
+                      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                          <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#">Profile</a>
+                          </li>
+                        </ul>
+                        <button type="button" class="btn btn-outline-success mx-2">Login</button>
+                        <button type="button" class="btn btn-outline-success">Register</button>
+                      </div>
+                    </div>
+                  </nav>
+            </div>
+        </div>
+       </div>
+       <!-- // NAVIGATION BAR CONT // -->
+
+       <!-- MAIN CONTENT -->
+        <div class="container" style="height: 1000px">
+            <!-- POSTS -->
+            <div class="d-flex justify-content-center mt-5">
+                <div class="col-9">
+                    <div id="posts">
+                        <!-- Post -->
+                        <div class="card shadow  ">
+                            <div class="card-header">
+                            <img class="rounded-circle border border2" src="./profile-pics/profile.jpg" alt="" style="width: 40px; height: 40px;">
+                            <b>@Samah</b>
+                            </div>
+                            <div class="card-body">
+                            <img class="w-100" src="./placeholders/post.jpg" alt="">
+                            <h6 style="color: rgb(193, 193,193);" class="mt-1">2 min ago</h6>
+                            <h5>Hello World!</h5>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, labore voluptatum? Iusto temporibus, unde adipisci quia beatae quaerat, quae corrupti blanditiis id porro amet? Iusto libero illum amet possimus quas?</p>
+                            <hr>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                                    <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
+                                  </svg>
+                                <span>
+                                    (3) Comments
+                                </span>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="card shadow  ">
+                            <div class="card-header">
+                            <img class="rounded-circle border border2" src="./profile-pics/profile.jpg" alt="" style="width: 40px; height: 40px;">
+                            <b>@Samah</b>
+                            </div>
+                            <div class="card-body">
+                            <img class="w-100" src="./placeholders/post.jpg" alt="">
+                            <h6 style="color: rgb(193, 193,193);" class="mt-1">2 min ago</h6>
+                            <h5>Hello World!</h5>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, labore voluptatum? Iusto temporibus, unde adipisci quia beatae quaerat, quae corrupti blanditiis id porro amet? Iusto libero illum amet possimus quas?</p>
+                            <hr>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                                    <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
+                                  </svg>
+                                <span>
+                                    (3) Comments
+                                </span>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="card shadow  ">
+                            <div class="card-header">
+                            <img class="rounded-circle border border2" src="./profile-pics/profile.jpg" alt="" style="width: 40px; height: 40px;">
+                            <b>@Samah</b>
+                            </div>
+                            <div class="card-body">
+                            <img class="w-100" src="./placeholders/post.jpg" alt="">
+                            <h6 style="color: rgb(193, 193,193);" class="mt-1">2 min ago</h6>
+                            <h5>Hello World!</h5>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe, labore voluptatum? Iusto temporibus, unde adipisci quia beatae quaerat, quae corrupti blanditiis id porro amet? Iusto libero illum amet possimus quas?</p>
+                            <hr>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                                    <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
+                                  </svg>
+                                <span>
+                                    (3) Comments
+                                </span>
+                            </div>
+                            </div>
+                        </div>
+                        <!-- // POST // -->
+
+                    </div>
+                </div>    
+            </div>   
+            <!-- // POSTS // -->
+        </div>
+       <!-- // MAIN CONTENT // -->
+</body>
+</html>
