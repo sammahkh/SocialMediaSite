@@ -227,7 +227,7 @@
            const modal = document.getElementById("login-modal")
            const modalInstance = bootstrap.Modal.getInstance(modal)
            modalInstance.hide()
-           showSuccessAlert()
+           showSuccessAlert("Logged in successfully")
            setupUI()
 
         })
@@ -237,31 +237,11 @@
     function logout(){
       localStorage.removeItem("token")
       localStorage.removeItem("user")
+      showSuccessAlert("Logged out successfully")
       setupUI()
     }
-    function showSuccessAlert()
-    {
-        const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
-  const appendAlert = (message, type) => {
-    const wrapper = document.createElement('div')
-    wrapper.innerHTML = [
-      `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-      `   <div>${message}</div>`,
-      '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-      '</div>'
-    ].join('')
-
-    alertPlaceholder.append(wrapper)
-  }
-
-  const alertTrigger = document.getElementById('liveAlertBtn')
-  if (alertTrigger) {
-    alertTrigger.addEventListener('click', () => {
-      appendAlert('Nice, you triggered this alert message!', 'success')
-    })
-  }
-    }
-
+    
+    
    
    function setupUI()
     {
@@ -286,7 +266,7 @@
 
     }
 
-    function showSuccessAlert(){
+    function showSuccessAlert(customMessege){
       const alertPlaceholder = document.getElementById('success-alert')
    const alert = (message, type) => {
   const wrapper = document.createElement('div')
@@ -299,12 +279,13 @@
 
   alertPlaceholder.append(wrapper)
 }
-    alert('Nice, you triggered this alert message!', 'success')
+    alert(customMessege, 'success')
 
-    
+     // todo: hide the alert
      setTimeout(()=>{
       const alertToHide = bootstrap.Alert.getOrCreateInstance('#success-alert')
-      alertToHide.close()
+     // document.getElementById("success-alert").hide();
+     // alertToHide.close()
      },2000) 
  
     }
