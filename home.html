@@ -66,11 +66,11 @@
               </div>
               <div class="mb-3">
                 <label for="message-text" class="col-form-label" >Username:</label>
-                <input type="password" class="form-control" id="register-username-input" value="123456">
+                <input type="text" class="form-control" id="register-username-input" value="samah">
               </div>
               <div class="mb-3">
                 <label for="message-text" class="col-form-label" >Password:</label>
-                <input type="password" class="form-control" id="refister-password-input" value="123456">
+                <input type="password" class="form-control" id="register-password-input" value="123456">
               </div>
             </form>
           </div>
@@ -265,6 +265,31 @@
     getPosts()
 
   function registerBtnClicked(){
+        const name = document.getElementById("register-name-input").value
+        const username = document.getElementById("register-username-input").value
+        const password = document.getElementById("register-password-input").value
+        const params={
+            "username": username,
+            "password": password,
+            "name": name
+        }
+        const url=`${baseUrl}/register`
+        axios.post(url,params)
+        .then((response)=>{
+           localStorage.setItem("token",response.data.token)
+           localStorage.setItem("user",JSON.stringify(response.data.user))
+           const modal = document.getElementById("register-modal")
+           const modalInstance = bootstrap.Modal.getInstance(modal)
+           modalInstance.hide()
+           showAlert("New User Registerd Successfully","success")
+           setupUI()
+
+        }).catch((error)=>{
+        const message=error.response.data.message
+        showAlert(message,"danger")
+        }
+        )
+
    
   }
 
@@ -285,7 +310,7 @@
            const modal = document.getElementById("login-modal")
            const modalInstance = bootstrap.Modal.getInstance(modal)
            modalInstance.hide()
-           showSuccessAlert("Logged in successfully")
+           showAlert("Logged in successfully","success")
            setupUI()
 
         })
@@ -295,7 +320,7 @@
     function logout(){
       localStorage.removeItem("token")
       localStorage.removeItem("user")
-      showSuccessAlert("Logged out successfully")
+      showAlert("Logged out successfully")
       setupUI()
     }
     
@@ -324,7 +349,7 @@
 
     }
 
-    function showSuccessAlert(customMessege){
+    function showAlert(customMessege,type="success"){
       const alertPlaceholder = document.getElementById('success-alert')
    const alert = (message, type) => {
   const wrapper = document.createElement('div')
@@ -337,7 +362,7 @@
 
   alertPlaceholder.append(wrapper)
 }
-    alert(customMessege, 'success')
+    alert(customMessege, type)
 
      // todo: hide the alert
      setTimeout(()=>{
