@@ -51,7 +51,7 @@
      <!-- // LOGIN MODAL // -->
        <!-- // MOODALS // -->
       <!-- ==ALERTS== -->
-      <div id="success-alert"></div>
+      <div id="success-alert" class="show fade"></div>
 
 
        <!-- NAVIGATION BAR CONT -->
@@ -237,7 +237,6 @@
     function logout(){
       localStorage.removeItem("token")
       localStorage.removeItem("user")
-      alert("logged out successfully")
       setupUI()
     }
     function showSuccessAlert()
@@ -301,6 +300,12 @@
   alertPlaceholder.append(wrapper)
 }
     alert('Nice, you triggered this alert message!', 'success')
+
+    
+     setTimeout(()=>{
+      const alertToHide = bootstrap.Alert.getOrCreateInstance('#success-alert')
+      alertToHide.close()
+     },2000) 
  
     }
    </script>
