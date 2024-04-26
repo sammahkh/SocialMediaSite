@@ -50,6 +50,8 @@
       </div>
      <!-- // LOGIN MODAL // -->
        <!-- // MOODALS // -->
+      <!-- ==ALERTS== -->
+      <div id="success-alert"></div>
 
 
        <!-- NAVIGATION BAR CONT -->
@@ -225,7 +227,7 @@
            const modal = document.getElementById("login-modal")
            const modalInstance = bootstrap.Modal.getInstance(modal)
            modalInstance.hide()
-           alert("user logged in succssfully")
+           showSuccessAlert()
            setupUI()
 
         })
@@ -261,7 +263,8 @@
   }
     }
 
-    function setupUI()
+   
+   function setupUI()
     {
       const token =localStorage.getItem("token")
       const loginBtn =document.getElementById("login-btn")
@@ -282,6 +285,23 @@
       }
 
 
+    }
+
+    function showSuccessAlert(){
+      const alertPlaceholder = document.getElementById('success-alert')
+   const alert = (message, type) => {
+  const wrapper = document.createElement('div')
+  wrapper.innerHTML = [
+    `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+    `   <div>${message}</div>`,
+    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+    '</div>'
+  ].join('')
+
+  alertPlaceholder.append(wrapper)
+}
+    alert('Nice, you triggered this alert message!', 'success')
+ 
     }
    </script>
 </html>
