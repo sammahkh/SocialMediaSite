@@ -109,11 +109,14 @@
               <form>
                 <div class="mb-3">
                   <label for="recipient-name" class="col-form-label">Title</label>
-                  <input type="text" class="form-control" id="username-input" value="">
+                  <input type="text" class="form-control" id="post-title-input" value="">
                 </div>
                 <div class="mb-3">
-                  <label for="message-text" class="col-form-label" >Body</label>
-                  <input type="password" class="form-control" id="password-input" value="123456">
+                 <textarea name="" id="post-body-input" style="width: 100%; height: 100px; border-color:gray; border-radius: 10px; resize: none;"></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="recipient-name" class="col-form-label">Image</label>
+                  <input type="file" class="form-control" id="post-image-input">
                 </div>
               </form>
             </div>
@@ -376,7 +379,39 @@
     
    function createNewPostBtnClicked()
     {
-      alert("hello world")
+       const title = document.getElementById("post-title-input").value
+        const body= document.getElementById("post-body-input").value
+        const image= document.getElementById("post-image-input").files[0]
+        formData=new FormData()
+        formData.append("body",body)
+        formData.append("title",title)
+        formData.append("image",image)
+
+
+      
+        const url=`${baseUrl}/posts`
+        
+          const token =localStorage.getItem("token")
+          const headers={
+            "Content-Type":"multipart/form-data",
+            "authorization":`Bearer ${token}`
+          }
+        
+        axios.post(url,formData,{
+          headers:headers
+        })
+        .then((response)=>{
+          const modal = document.getElementById("create-post-modal")
+           const modalInstance = bootstrap.Modal.getInstance(modal)
+           modalInstance.hide()
+           showAlert("New Post Has Been Added","success")
+           getPosts()
+
+        }).catch((error)=>{
+        const message=error.response.data.message
+        showAlert(message,"danger")
+        }
+        )
     }
    
    function setupUI()
