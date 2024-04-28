@@ -17,6 +17,20 @@
         .card{
             margin-top: 30px;
         }
+        #add-btn{
+          position: fixed;
+          bottom: 5%;
+          right: 7%;
+          height: 70px;
+          width: 70px;
+          font-size: 50px;
+          color: white;
+          border-radius: 100px;
+          /* line-height: ; */
+          text-align: center;
+          cursor: pointer;
+          box-shadow: 0px 10px 10px rgba(0,0,0, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -82,7 +96,43 @@
       </div>
     </div>
     <!-- // REGISTER MODAL // -->
+
+       <!-- CREATE POST MODAL -->
+       <div class="modal fade" id="create-post-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Create A New Post</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="mb-3">
+                  <label for="recipient-name" class="col-form-label">Title</label>
+                  <input type="text" class="form-control" id="username-input" value="">
+                </div>
+                <div class="mb-3">
+                  <label for="message-text" class="col-form-label" >Body</label>
+                  <input type="password" class="form-control" id="password-input" value="123456">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" onclick="createNewPostBtnClicked()">Create</button>
+            </div>
+          </div>
+        </div>
+      </div>
+     <!-- // CREATE POST MODAL // -->
+
        <!-- // MOODALS // -->
+
+      <!-- ADD POST BUTTON -->
+      <div class="bg-primary" id="add-btn" data-bs-toggle="modal" data-bs-target="#create-post-modal">
+        +
+      </div>
+
       <!-- ==ALERTS== -->
       <div id="success-alert" class="show fade"></div>
 
@@ -231,7 +281,7 @@
                                     <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
                                   </svg>
                                 <span>
-                                    ${post.comments_count}
+                                    <b>(${post.comments_count})Comments</b>
                                 </span>
                                 <span id="post-tags-${post.id}" >
                                   <button class="btn btn-sm rounded-5" style="background-color: gray; color:white">
@@ -324,7 +374,10 @@
       setupUI()
     }
     
-    
+   function createNewPostBtnClicked()
+    {
+      alert("hello world")
+    }
    
    function setupUI()
     {
@@ -333,14 +386,19 @@
       const registerBtn =document.getElementById("register-btn")
       const logoutBtn =document.getElementById("logout-btn")
 
+      //add btn
+      const addBtn=document.getElementById("add-btn")
+
       if(token==null)//user is guest (not logged in)
       {
+        addBtn.style.setProperty("display","none","important")
         loginBtn.style.visibility="visible"
         registerBtn.style.visibility="visible"
         logoutBtn.style.display="none"
 
 
       }else{
+        addBtn.style.setProperty("display","block","important")
         loginBtn.style.visibility="hidden"
         registerBtn.style.visibility="hidden"
         logoutBtn.style.display="block"
