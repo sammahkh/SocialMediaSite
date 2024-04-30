@@ -267,15 +267,32 @@
 
 </body>
 <script>
+  //==== INFINT SCROLL ====//
+  window.addEventListener("scroll", () =>{
+
+    const endOfPage = window.innerHeight + window.pageYOffset >= document.body.offsetHeight;
+    console.log(endOfPage)
+    if(endOfPage && currentPage<lastPage){
+      currentPage+=1
+      getPosts(currentPage,false)
+    }
+  })
     setupUI()
     const baseUrl="https://tarmeezacademy.com/api/v1"
-    function getPosts()
+    let currentPage=1
+    let lastPage=1
+    function getPosts(page = 1,reload=true)
     {
       
-     axios.get(`${baseUrl}/posts?limit=5`)
+     axios.get(`${baseUrl}/posts?limit=5&page=${currentPage}`)
      .then((response)=>{
         const posts =response.data.data
-        document.getElementById("posts").innerHTML=""
+        lastPage=response.data.meta.last_page
+        if(reload)
+        {
+          document.getElementById("posts").innerHTML=""
+        }
+       
        for(post of posts)
        {
         const author=post.author
