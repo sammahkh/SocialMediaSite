@@ -75,6 +75,10 @@
           <div class="modal-body">
             <form>
               <div class="mb-3">
+                <label for="recipient-name" class="col-form-label">Profile Image:</label>
+                <input type="file" class="form-control" id="register-img-input" value="samah">
+              </div>
+              <div class="mb-3">
                 <label for="recipient-name" class="col-form-label">Name:</label>
                 <input type="text" class="form-control" id="register-name-input" value="samah">
               </div>
@@ -164,7 +168,14 @@
                         <button id="register-btn" type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#register-modal">Register</button>
                         <!-- // NON LOGGED IN USER // -->
                         <!-- FOR LOGGED IN USER -->
-                        <button id="logout-btn" type="button" class="btn btn-outline-danger mx-2 "onclick="logout()">Logout</button>
+                      
+                          <img id="user-img" class="rounded-circle " style="width: 40px; height: 40px; margin-right: 5px;" src="./profile-pics/profile.jpg" alt="">
+                          <b id="nav-username">
+                            @Samah
+  
+                          </b>
+                          <button id="logout-btn" type="button" class="btn btn-outline-danger mx-2 "onclick="logout()">Logout</button>
+                        
                         <!-- // FOR LOGGED IN USER //-->
 
                       </div>
@@ -260,6 +271,7 @@
     const baseUrl="https://tarmeezacademy.com/api/v1"
     function getPosts()
     {
+      
      axios.get(`${baseUrl}/posts?limit=5`)
      .then((response)=>{
         const posts =response.data.data
@@ -321,14 +333,27 @@
         const name = document.getElementById("register-name-input").value
         const username = document.getElementById("register-username-input").value
         const password = document.getElementById("register-password-input").value
-        const params={
-            "username": username,
-            "password": password,
-            "name": name
-        }
+        const image = document.getElementById("register-img-input").files[0]
+
+        
+
+       
+
+        formData=new FormData()
+        formData.append("name",name)
+        formData.append("username",username)
+        formData.append("password",password)
+        formData.append("image",image)
+
+        const headers={
+            "Content-Type":"multipart/form-data",
+          }
         const url=`${baseUrl}/register`
-        axios.post(url,params)
+        axios.post(url,formData,{
+          headers:headers
+        })
         .then((response)=>{
+          console.log(response.data)
            localStorage.setItem("token",response.data.token)
            localStorage.setItem("user",JSON.stringify(response.data.user))
            const modal = document.getElementById("register-modal")
@@ -382,8 +407,8 @@
        const title = document.getElementById("post-title-input").value
         const body= document.getElementById("post-body-input").value
         const image= document.getElementById("post-image-input").files[0]
-        formData=new FormData()
-        formData.append("body",body)
+        Data=new FormData()
+        formDataform.append("body",body)
         formData.append("title",title)
         formData.append("image",image)
 
@@ -420,6 +445,8 @@
       const loginBtn =document.getElementById("login-btn")
       const registerBtn =document.getElementById("register-btn")
       const logoutBtn =document.getElementById("logout-btn")
+      const userImg =document.getElementById("user-img")
+      const navUser =document.getElementById("nav-username")
 
       //add btn
       const addBtn=document.getElementById("add-btn")
@@ -430,16 +457,35 @@
         loginBtn.style.visibility="visible"
         registerBtn.style.visibility="visible"
         logoutBtn.style.display="none"
+        userImg.style.display="none"
+        navUser.style.display="none"
 
 
-      }else{
+
+      }else{//for logged in user
         addBtn.style.setProperty("display","block","important")
         loginBtn.style.visibility="hidden"
         registerBtn.style.visibility="hidden"
         logoutBtn.style.display="block"
+        userImg.style.display="inline"
+        navUser.style.display="inline"
+        const user=getCurrentUser()
+        document.getElementById("nav-username").innerHTML=user.username
+        document.getElementById("user-img").src=user.profile_image
+
+
       }
 
 
+    }
+
+    function getCurrentUser(){
+      let user=null
+      const storageUser=localStorage.getItem("user")
+      if(storageUser!=null){
+        user=JSON.parse(storageUser)
+      }
+      return user
     }
 
     function showAlert(customMessege,type="success"){
