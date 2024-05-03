@@ -243,7 +243,7 @@
 
 
              <!-- Comment -->
-             <div class="p-3" style="background-color:rgb(235, 235, 235);">
+             <div class="p-3" style="background-color:rgb(167, 163, 163);">
                 <!-- profile pic + username -->
                 <div>
                 <img src="./profile-pics/profile.jpg" class="rounded-circle"  style="width: 40px;height: 40px;" alt="">
@@ -285,6 +285,34 @@
         const comments=post.comments
         const author=post.author
         document.getElementById("username-span").innerHTML=author.username
+        let commentsContent=`
+        `
+        for(comment of comments){
+            commentsContent+=`
+            <!-- Comment -->
+            <div class="p-3" style="background-color:rgb(230, 230, 230);">
+                <!-- profile pic + username -->
+                <div>
+                <img src="${comment.author.profile_image}" class="rounded-circle"  style="width: 40px;height: 40px;" alt="">
+                <b>${comment.author.username}</b>
+                </div>
+                
+
+                <!-- // profile pic + username // -->
+                <!-- commend body -->
+                <div>
+                    ${comment.body}
+                </div>
+
+                <!--  // commend body // -->
+                
+            </div>
+            <!-- // Comment // -->
+            `
+        }
+
+
+
         const postContent=`
         <div class="card shadow  ">
             <div class="card-header">
@@ -308,10 +336,14 @@
             </div>
             </div>
           </div>
+          <div id ="comments">
+            ${commentsContent}
+
+            </div>
        </div>    
     
         `
-    //  document.getElementById("post").innerHTML=postContent
+    document.getElementById("post").innerHTML=postContent
      })
     }
 
