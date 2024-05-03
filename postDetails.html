@@ -183,7 +183,7 @@
        <!-- MAIN CONTENT -->
 
        <div class="container" style="height: 1000px">
-        <!-- POSTS -->
+        <!-- POST -->
         <div class="row d-flex justify-content-center mt-5">
             <div class="col-9">
             <h1>
@@ -199,11 +199,12 @@
        <div class="row d-flex justify-content-center mt-5">
           <div class="col-9" id="post">
             <div class="card shadow  ">
-            <div class="card-header">
+             <div class="card-header">
             <img class="rounded-circle border border2" src="./profile-pics/profile.jpg" alt="" style="width: 40px; height: 40px;">
             <b>@Samah</b>
             </div>
             <div class="card-body">
+             
             <img class="w-100" src="./placeholders/post.jpg" alt="">
             <h6 style="color: rgb(193, 193,193);" class="mt-1">2 min ago</h6>
             <h5>Hello World!</h5>
@@ -218,12 +219,58 @@
                 </span>
             </div>
             </div>
+
+            <div id="comments">
+                 <!-- Comment -->
+            <div class="p-3" style="background-color:rgb(235, 235, 235);">
+                <!-- profile pic + username -->
+                <div>
+                <img src="./profile-pics/profile.jpg" class="rounded-circle"  style="width: 40px;height: 40px;" alt="">
+                <b>@Samah</b>
+                </div>
+                
+
+                <!-- // profile pic + username // -->
+                <!-- commend body -->
+                <div>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis non quas cumque doloribus soluta consequatur ipsa impedit sed sapiente aspernatur, quasi modi alias facilis, in dolor rerum cupiditate laborum corrupti.
+                </div>
+
+                <!--  // commend body // -->
+                
             </div>
-          </div>
-       </div>    
+            <!-- // Comment // -->
+
+
+             <!-- Comment -->
+             <div class="p-3" style="background-color:rgb(235, 235, 235);">
+                <!-- profile pic + username -->
+                <div>
+                <img src="./profile-pics/profile.jpg" class="rounded-circle"  style="width: 40px;height: 40px;" alt="">
+                <b>@Samah</b>
+                </div>
+                
+
+                <!-- // profile pic + username // -->
+                <!-- commend body -->
+                <div>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officiis non quas cumque doloribus soluta consequatur ipsa impedit sed sapiente aspernatur, quasi modi alias facilis, in dolor rerum cupiditate laborum corrupti.
+                </div>
+
+                <!--  // commend body // -->
+                
+            </div>
+            <!-- // Comment // -->
+            </div>
+           
+              </div>
+            </div>
+        </div>
+          
     <!-- // POST ROW // -->
     </div>
-    
+
+
 </body>
 <script>
     setupUI()
@@ -264,7 +311,7 @@
        </div>    
     
         `
-     document.getElementById("post").innerHTML=postContent
+    //  document.getElementById("post").innerHTML=postContent
      })
     }
 
