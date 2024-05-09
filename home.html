@@ -136,6 +136,27 @@
       </div>
      <!-- // CREATE POST MODAL // -->
 
+     <!-- DELETE POST MODAL -->
+     <div class="modal fade" id="delete-post-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="post-modal-title">Are you sure you want to delete the post? 
+              <span id="delete-post-title"></span> 
+            </h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <input type="hidden" id="delete-post-id-input" value="">
+          </div>
+          
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button id="post-modal-submit-btn" type="button" class="btn btn-danger" onclick="confirmPostDelete()">Yes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+   <!-- // DELETE POST MODAL // -->
+
        <!-- // MOODALS // -->
 
       <!-- ADD POST BUTTON -->
@@ -302,7 +323,9 @@
         let isMyPost= user !=null && post.author.id==user.id
         let editButtonContent =``
         if(isMyPost){
-          editButtonContent=`<button class="btn btn-secondary" style="float:right;" onclick="editPostBtnClicked('${encodeURIComponent(JSON.stringify(post))}')">edit</button>`
+          editButtonContent=`
+          <button class="btn btn-danger" style="float:right; margin-left:4px;" onclick="deletePostBtnClicked('${encodeURIComponent(JSON.stringify(post))}')">delete</button>
+          <button class="btn btn-secondary" style="float:right;" onclick="editPostBtnClicked('${encodeURIComponent(JSON.stringify(post))}')">edit</button>`
         }
 
 
@@ -430,6 +453,45 @@
 
 
     }
+    function deletePostBtnClicked(postObj)
+
+    {
+      let post =JSON.parse(decodeURIComponent(postObj))
+      document.getElementById("delete-post-id-input").value=post.id
+     
+
+      let postModal= new bootstrap.Modal(document.getElementById("delete-post-modal"),{})
+      postModal.toggle()
+
+
+    }
+
+    function confirmPostDelete(){
+        const token=localStorage.getItem("token")
+        const postId=document.getElementById("delete-post-id-input").value
+        const url=`${baseUrl}/posts/${postId}`
+        const headers={
+            "Content-Type":"multipart/form-data",
+            "authorization":`Bearer ${token}`
+          }
+        axios.delete(url,{
+          headers:headers
+        })
+        .then((response)=>{
+           
+           const modal = document.getElementById("delete-post-modal")
+           const modalInstance = bootstrap.Modal.getInstance(modal)
+           modalInstance.hide()
+           showAlert("The Post Has Been Deleted Successfully","success")
+           getPosts()
+
+
+        }).catch((error) => {
+          const message= error.response.data.message
+          showAlert(message,"danger")
+
+        })
+      }
 
     function addBtnClicked(){
       document.getElementById("post-modal-submit-btn").innerHTML="Create"
