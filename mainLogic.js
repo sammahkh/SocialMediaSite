@@ -157,4 +157,122 @@ function setupUI()
        },2000) 
    
       }
-    
+      function editPostBtnClicked(postObj)
+
+      {
+        let post =JSON.parse(decodeURIComponent(postObj))
+        document.getElementById("post-modal-submit-btn").innerHTML="Update"
+        document.getElementById("post-id-input").value=post.id
+        document.getElementById("post-modal-title").innerHTML="Edit Post"
+        document.getElementById("post-title-input").value=post.title
+        document.getElementById("post-body-input").value=post.body
+  
+        let postModal= new bootstrap.Modal(document.getElementById("create-post-modal"),{})
+        postModal.toggle()
+  
+  
+      }
+      function deletePostBtnClicked(postObj)
+  
+      {
+        let post =JSON.parse(decodeURIComponent(postObj))
+        document.getElementById("delete-post-id-input").value=post.id
+       
+  
+        let postModal= new bootstrap.Modal(document.getElementById("delete-post-modal"),{})
+        postModal.toggle()
+  
+  
+      }
+  
+      function confirmPostDelete(){
+          const token=localStorage.getItem("token")
+          const postId=document.getElementById("delete-post-id-input").value
+          const url=`${baseUrl}/posts/${postId}`
+          const headers={
+              "Content-Type":"multipart/form-data",
+              "authorization":`Bearer ${token}`
+            }
+          axios.delete(url,{
+            headers:headers
+          })
+          .then((response)=>{
+             
+             const modal = document.getElementById("delete-post-modal")
+             const modalInstance = bootstrap.Modal.getInstance(modal)
+             modalInstance.hide()
+             showAlert("The Post Has Been Deleted Successfully","success")
+             getPosts()
+  
+  
+          }).catch((error) => {
+            const message= error.response.data.message
+            showAlert(message,"danger")
+  
+          })
+        }
+    function createNewPostBtnClicked()
+    {
+      let postId=document.getElementById("post-id-input").value
+      let isCreated= postId==null || postId==""
+
+       const title = document.getElementById("post-title-input").value
+        const body= document.getElementById("post-body-input").value
+        const image= document.getElementById("post-image-input").files[0]
+      let  formData=new FormData()
+        formData.append("body",body)
+        formData.append("title",title)
+        formData.append("image",image)
+
+
+      
+        let url=``
+        
+          const token =localStorage.getItem("token")
+          const headers={
+            "Content-Type":"multipart/form-data",
+            "authorization":`Bearer ${token}`
+          }
+        if(isCreated){
+          url=`${baseUrl}/posts`
+          
+
+        }else{
+          formData.append("_method","put")
+          url=`${baseUrl}/posts/${postId}`
+
+        }
+        axios.post(url,formData,{
+          headers:headers
+        })
+        .then((response)=>{
+          const modal = document.getElementById("create-post-modal")
+           const modalInstance = bootstrap.Modal.getInstance(modal)
+           modalInstance.hide()
+           showAlert("New Post Has Been Added","success")
+           getPosts()
+
+        }).catch((error)=>{
+        const message=error.response.data.message
+        showAlert(message,"danger")
+        }
+        )
+        
+    }
+    function addBtnClicked(){
+      document.getElementById("post-modal-submit-btn").innerHTML="Create"
+      document.getElementById("post-id-input").value=""
+      document.getElementById("post-modal-title").innerHTML="Create Post"
+      document.getElementById("post-title-input").value=""
+      document.getElementById("post-body-input").value=""
+
+      let postModal= new bootstrap.Modal(document.getElementById("create-post-modal"),{})
+      postModal.toggle()
+
+    }
+    function profileClicked(){
+     const user= getCurrentUser()
+     const userId=user.id
+      window.location=`profile.html?userid=${userId}`
+
+    }

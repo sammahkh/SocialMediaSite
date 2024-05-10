@@ -196,7 +196,7 @@
                             <a class="nav-link active" aria-current="page" href="home.html">Home</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" href="profile.html">Profile</a>
+                            <a class="nav-link" onclick="profileClicked()" style="cursor: pointer;">Profile</a>
                           </li>
                         </ul>
                         <!-- NON LOGGED IN USER -->
@@ -232,30 +232,31 @@
                             <div class="row">
                                 <!-- user image col -->
                                 <div class="col-2">
-                                    <img src="./profile-pics/profile.jpg" id="header-img" alt="" style="width:120px; border-radius: 200px !important;  ">
+                                    <img src="./profile-pics/profile.jpg" id="main-info-img" alt="" style="width:120px; border-radius: 200px !important;  ">
                                 </div>
                                 <!-- // user image col // -->
                                 <!-- username email name -->
                                 <div class="col-4 d-flex flex-column justify-content-evenly" style="font-weight: 500;">
-                                    <div class="user-main-info">
-                                       samah100
-                                    </div>
-                                    <div class="user-main-info">
+                                    
+                                    <div class="user-main-info" id="main-info-email">
                                         samah@gmail.com
                                     </div>
-                                    <div class="user-main-info">
+                                    <div class="user-main-info" id="main-info-name">
                                         samah
                                     </div>
+                                    <div class="user-main-info" id="main-info-username">
+                                      samah100
+                                   </div>
                                 </div>
                                 <!-- // username email name // -->
 
                                  <!-- // posts & comments count // -->
                                  <div class="col-4 d-flex flex-column justify-content-evenly">
                                     <div class="number-info">
-                                        <span>13</span>Posts
+                                        <span id="posts-counts">13</span>Posts
                                     </div>
                                     <div class="number-info">
-                                        <span>20</span>Comments
+                                        <span id="comments-counts">20</span>Comments
                                     </div>
                                    
                                  </div>
@@ -269,9 +270,9 @@
                    <!-- // main info // -->
                    <!-- posts title -->
                    <div class="row mt-5">
-                    <h1>samah's Posts</h1>
+                    <h1 ><span id="name-posts"> samah's</span> Posts</h1>
                     <!-- posts -->
-                    <div class="row">
+                    <div class="row" id="user-posts">
                       <!-- post -->
                       <div class="card shadow  ">
                         <div class="card-header">
