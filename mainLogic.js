@@ -47,11 +47,21 @@ function setupUI()
 
 
     }
+    function toggleLoader(show=true){
+      if(show){
+        document.getElementById("loader").style.visibility='visible'
+        
+      }else{
+        document.getElementById("loader").style.visibility='hidden'
+
+      }
+    }    
 
     //auth functions
 
     function loginBtnClicked()
     {
+      toggleLoader(true)
         const username = document.getElementById("username-input").value
         const password = document.getElementById("password-input").value
         const params={
@@ -61,6 +71,7 @@ function setupUI()
         const url=`${baseUrl}/login`
         axios.post(url,params)
         .then((response)=>{
+
            localStorage.setItem("token",response.data.token)
            localStorage.setItem("user",JSON.stringify(response.data.user))
            const modal = document.getElementById("login-modal")
@@ -69,7 +80,15 @@ function setupUI()
            showAlert("Logged in successfully","success")
            setupUI()
 
-        })
+        }).catch((error)=>{
+          const message=error.response.data.message
+          showAlert(message,"danger")
+          }
+          )
+         .finally(()=>{
+          toggleLoader(false)
+
+         })
 
     }
     function registerBtnClicked(){
@@ -79,7 +98,7 @@ function setupUI()
         const image = document.getElementById("register-img-input").files[0]
 
         
-
+        toggleLoader(true)
        
 
         formData=new FormData()
@@ -109,7 +128,10 @@ function setupUI()
         const message=error.response.data.message
         showAlert(message,"danger")
         }
-        )
+        ) .finally(()=>{
+          toggleLoader(false)
+
+         })
 
    
   }
@@ -213,6 +235,7 @@ function setupUI()
         }
     function createNewPostBtnClicked()
     {
+      toggleLoader(true)
       let postId=document.getElementById("post-id-input").value
       let isCreated= postId==null || postId==""
 
@@ -257,7 +280,10 @@ function setupUI()
         showAlert(message,"danger")
         }
         )
-        
+        .finally(()=>{
+          toggleLoader(false)
+
+         })
     }
     function addBtnClicked(){
       document.getElementById("post-modal-submit-btn").innerHTML="Create"
@@ -276,3 +302,4 @@ function setupUI()
       window.location=`profile.html?userid=${userId}`
 
     }
+    
